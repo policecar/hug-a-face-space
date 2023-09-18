@@ -1,0 +1,6 @@
+black==23.9.1
+gradio==3.44.3
+PySide6==6.5.2
+ruff==0.0.290
+tensorflow==2.13.0
+transformers==4.33.2
