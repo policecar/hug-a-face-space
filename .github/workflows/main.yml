@@ -1,0 +1,27 @@
+name: hug-a-face-space
+
+on:
+  push:
+    branches: [main]
+  pull_request: 
+    branches: [main]
+  
+  # allows you to dispatch this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  sync-to-hub:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
+      - name: Add remote
+        env:
+          HF: ${{ secrets.HF }}
+        run: git remote add space https://aksirp:$HF@huggingface.co/spaces/aksirp/demo
+      - name: Push to hub
+        env:
+          HF: ${{ secrets.HF }}
+        run: git push --force-with-lease https://aksirp:$HF@huggingface.co/spaces/aksirp/demo main
+  
